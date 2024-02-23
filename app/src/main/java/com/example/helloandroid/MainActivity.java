@@ -1,21 +1,63 @@
 package com.example.helloandroid;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.helloandroid.databinding.MyConstraintLayoutBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "text";
 
+    public String str1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toast.makeText(this, "Create", Toast.LENGTH_SHORT).show();
-        Log.i(TAG, "onCreate");
+//        Toast.makeText(this, "Create", Toast.LENGTH_SHORT).show();
+//        Log.i(TAG, "onCreate");
+//
+//        Intent intent = new Intent(this, SecondActivity.class);
+//        intent.putExtra("1", "HelloWorld");
+//        startActivity(intent);
+
+        MyConstraintLayoutBinding binding = MyConstraintLayoutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent intent1 = result.getData();
+                            binding.editText2.setText(intent1.getStringExtra("name1"));
+                        }
+                    }
+                });
+
+
+        binding.registrationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+                intent.putExtra("name", binding.editText2.getText().toString());
+                mStartForResult.launch(intent);
+            }
+        });
+
     }
 
     @Override
@@ -59,4 +101,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onDestroy");
         Toast.makeText(this, "Destroy", Toast.LENGTH_SHORT).show();
     }
+
+    public void btnClick(View v) {
+        Toast.makeText(this, "LoginButton", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showInfo(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
 }

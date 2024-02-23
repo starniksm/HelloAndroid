@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">HelloAndroid</string>
+    <string name="yakovlev_nikita">Yakovlev Nikita</string>
+    <string name="Hello">Привет, пользователь</string>
+    <string name="enter1">Вход</string>
+    <string name="registration1">Регистрация</string>
+    <string name="pass1">Пароль</string>
+    <string name="login1">Логин</string>
+    <string name="registratin_text">Переход на страницу регистрации</string>
+    <string name="registration2">Регистрация</string>
+    <string name="email">Почта</string>
+    <string name="next">➔</string>
+    <string name="Undo">❮</string>
 </resources>
