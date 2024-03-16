@@ -56,4 +56,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="first_fragment">First Fragment</string>
+    <string name="Menu">Главное Меню</string>
+    <string name="toSecond">Перейти во 2 фрагмент</string>
+    <string name="toThird">Перейти в 3 фрагмент</string>
 </resources>
